@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transition Effect</title>
+    <style>
+        *{
+            margin: 0%;
+            padding: 0%;
+        }
+        html,body{
+            width: 100%;
+            height: 100%;
+        }
+        .container{
+            width: 100%;
+            height: 100%;
+            background-color: rgb(32, 20, 4);
+           /* display: flex;
+            align-items: center;
+            justify-content: center;*/
+        }
+
+        .container:has(#box:hover){
+
+    background:
+    radial-gradient(
+        circle,
+        rgba(255,140,0,0.6) 0%,
+        rgba(255,80,0,0.4) 30%,
+        rgba(0,0,0,1) 80%
+    );
+
+    animation: bgFire 1s infinite alternate;
+}
+
+@keyframes bgFire{
+
+    0%{
+        filter:brightness(1);
+    }
+
+    100%{
+        filter:brightness(1.5);
+    }
+}
+.container::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:100%;
+    height:100%;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%) scale(1);
+
+    border-radius:50%;
+
+    background: radial-gradient(
+        circle,
+        rgba(255,140,0,0.8) 0%,
+        rgba(255,80,0,0.5) 40%,
+        transparent 80%
+    );
+
+    z-index:-1;
+
+    transition:3s ease;
+}
+
+.container:hover::after{
+
+    transform:translate(-50%,-50%) scale(8);
+
+    opacity:1;
+}
+
+        #box{
+            width: 80px;
+            height: 40px;
+            left: 0;
+            top: 0;
+            overflow: hidden;
+            background: black;
+            position: absolute;
+            border: 4px solid rgb(79, 26, 21);
+            cursor: pointer;
+            border-radius: 50%;
+            position: absolute;
+            transition-property: width, height ;
+            transition-delay: 1s;
+            transition-duration: 4s;
+            transition-timing-function: linear;
+            animation:
+            colorChange 5s linear  infinite ,
+            flame 0.8s infinite alternate;
+        }
+
+        @keyframes flame {
+             0%{
+        box-shadow:
+        0 0 10px red,
+        0 0 20px orange,
+        0 0 30px yellow;
+    }
+
+    25%{
+        box-shadow:
+        0 0 15px orange,
+        0 0 30px yellow,
+        0 0 45px red;
+    }
+
+    50%{
+        box-shadow:
+        0 0 20px yellow,
+        0 0 40px orange,
+        0 0 60px red;
+    }
+
+    75%{
+        box-shadow:
+        0 0 15px orange,
+        0 0 35px red,
+        0 0 50px yellow;
+    }
+
+    100%{
+        box-shadow:
+        0 0 10px red,
+        0 0 25px orange,
+        0 0 40px yellow;
+    }
+        }
+
+        @keyframes colorChange {
+            0%{
+                background: red;
+            }
+            20%{
+                background: orange;
+            }
+            40%{
+                background: pink;
+            }
+            60%{
+                background: skyblue;
+            }
+            80%{
+                background: yellowgreen;
+            }
+        }
+        
+
+        #box:hover{
+            width: 300px;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 50%;
+            transform: scale(1.05);
+            box-shadow:   
+                0 0 10px red,
+                0 0 20px orange,
+                0 0 30px yellow,
+                0 0 40px green,
+                0 0 50px blue,
+                0 0 60px indigo,
+                0 0 70px violet; ;
+        }
+        #box::before{
+
+    content:"";
+    position:absolute;
+
+    width:100%;
+    height:100%;
+
+    border-radius:50%;
+
+    background: radial-gradient(
+        circle,
+        yellow 0%,
+        orange 30%,
+        red 60%,
+        transparent 100%
+    );
+
+    
+
+    transform:scale(0);
+
+    opacity:0;
+
+    transition:1s;
+}
+
+#box:hover::before{
+
+    transform:scale(2);
+
+    opacity:1;
+
+    animation: flameMove 0.5s infinite ;
+    animation-fill-mode: backwards;
+}
+
+@keyframes flameMove{
+
+    0%{
+        filter:blur(5px);
+    }
+
+    100%{
+        filter:blur(15px);
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="box"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
